@@ -14,14 +14,14 @@ GPT-Long-Text is a Streamlit application that transforms interaction with length
 
 <!-- ## Setup -->
 
-### Prerequisites
+## Prerequisites
 
-- Python 3.x
+<!-- - Python 3.x -->
 - An OpenAI API key
-- Pinecone API key
-  - you need to create an Pinecone Index with dimension 1536.
-- Streamlit
-- Langchain
+- A running Pinecone Index with dimension 1536
+  - it's free! (https://www.pinecone.io/)
+<!-- - Streamlit -->
+<!-- - Langchain -->
 
 <!-- ### Installation
 
@@ -29,3 +29,6 @@ GPT-Long-Text is a Streamlit application that transforms interaction with length
 
 ```bash
 git clone https://github.com/yourusername/your-project.git -->
+## Demo
+
+Check out a live demo of the application here: [https://gpt-long-text.streamlit.app/](https://gpt-long-text.streamlit.app/)
