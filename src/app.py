@@ -21,7 +21,7 @@ if 'chat_history' not in st.session_state:
 
 styl = f"""
 <style>
-  textarea[aria-label="Code generated: "] {{
+  textarea[aria-label="Response: "] {{
     font-family: 'Consolas', monospace !important;
   }}
   }}
@@ -113,30 +113,10 @@ if submit_question:
 
     qa = lc_client.get_chain(chain_type="stuff", verbose=True)
 
-    # If user has their own API key, use it
-    if not openai_api_key:
-        try:
-            # If there is OPENAI_API_KEY in the environment variables, use it
-            # Otherwise, use Streamlit secrets variable
-            if os.environ["OPENAI_API_KEY"]:
-                openai_api_key = os.environ["OPENAI_API_KEY"]
-            else:
-                openai_api_key = st.secrets["OPENAI_API_KEY"]
-        except:
-            st.error("Error: Sorry, I disabled my OpenAI API key (the budget is over). Please use your own API key and it will work perfectly. Otherwise, please send me a message on Twitter (@360macky)")
-            st.stop()
+    if os.environ["OPENAI_API_KEY"]:
+        openai_api_key = os.environ["OPENAI_API_KEY"]
     else:
-        try:
-            pass
-            # openai.api_key = openai_api_key
-        except AuthenticationError:
-            st.error(
-                "Error: The OpenAI API key is invalid. Please check if it's correct.")
-            st.stop()
-        except:
-            st.error(
-                "Error: We couldn't authenticate your OpenAI API key. Please check if it's correct.")
-            st.stop()
+        openai_api_key = st.secrets["OPENAI_API_KEY"]
 
     response = qa(
         {'question': prompt, 'chat_history': st.session_state['chat_history']}
