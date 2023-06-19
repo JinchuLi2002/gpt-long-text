@@ -30,7 +30,6 @@ styl = f"""
 st.markdown(styl, unsafe_allow_html=True)
 
 st.title(":art: Talk to Long Texts")
-# st.write(":robot_face: Create beautiful and quick animations with GPT-4 and GPT-3.5 :sparkles:")
 
 ######## OpenAI Credentials ########
 openai_api_key = ""
