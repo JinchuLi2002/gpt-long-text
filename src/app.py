@@ -36,7 +36,7 @@ st.title(":art: Talk to Long Texts")
 openai_api_key = ""
 
 openai_model = st.selectbox(
-    "Select the GPT model.", ["gpt-3.5-turbo", "gpt-3.5-turbo-16k"])
+    "Select the GPT model.", ["gpt-3.5-turbo-16k", "gpt-3.5-turbo"])
 
 os.environ["OPENAI_API_KEY"] = st.text_input(
     "OpenAI API Key:", value="", type="password")
