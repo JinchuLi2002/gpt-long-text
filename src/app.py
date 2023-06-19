@@ -115,8 +115,6 @@ if submit_question:
 
     if os.environ["OPENAI_API_KEY"]:
         openai_api_key = os.environ["OPENAI_API_KEY"]
-    else:
-        openai_api_key = st.secrets["OPENAI_API_KEY"]
 
     response = qa(
         {'question': prompt, 'chat_history': st.session_state['chat_history']}
