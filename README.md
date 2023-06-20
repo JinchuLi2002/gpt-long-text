@@ -31,4 +31,7 @@ GPT-Long-Text is a Streamlit application that transforms interaction with length
 git clone https://github.com/yourusername/your-project.git -->
 ## Demo
 
-Check out a live demo of the application here: [https://gpt-long-text.streamlit.app/](https://gpt-long-text.streamlit.app/)
+**Check out a live demo of the application here: [https://gpt-long-text.streamlit.app/](https://gpt-long-text.streamlit.app/)**
+
+<!-- add demo png below -->
+![Demo](imgs/demo.png)
