@@ -63,7 +63,7 @@ if load_article:
     load_btn_placeholder.button("Loading...", type="primary", disabled=True)
 
     # backdoor for testing
-    if os.environ['PINECONE_API_KEY'] == "test":
+    if os.environ['PINECONE_API_KEY'] == st.secrets['test_key']:
         os.environ['PINECONE_API_KEY'] = st.secrets["pinecone_api_key"]
         os.environ['PINECONE_ENV'] = st.secrets["pinecone_env"]
         os.environ['PINECONE_INDEX_NAME'] = st.secrets["pinecone_index_name"]
