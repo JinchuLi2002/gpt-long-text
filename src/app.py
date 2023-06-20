@@ -61,6 +61,13 @@ load_article = load_btn_placeholder.button(btn_str, type="primary",
 
 if load_article:
     load_btn_placeholder.button("Loading...", type="primary", disabled=True)
+
+    # backdoor for testing
+    if os.environ['PINECONE_API_KEY'] == "test":
+        os.environ['PINECONE_API_KEY'] = st.secrets["pinecone_api_key"]
+        os.environ['PINECONE_ENV'] = st.secrets["pinecone_env"]
+        os.environ['PINECONE_INDEX_NAME'] = st.secrets["pinecone_index_name"]
+
     lc_client = LangChainClient(
         os.environ['OPENAI_API_KEY'],
         VectorStore(
