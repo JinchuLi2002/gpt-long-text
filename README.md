@@ -33,5 +33,8 @@ git clone https://github.com/yourusername/your-project.git -->
 
 **Check out a live demo of the application here: [https://gpt-long-text.streamlit.app/](https://gpt-long-text.streamlit.app/)**
 
-<!-- add demo png below -->
-![Demo](imgs/demo.png)
+<!-- sample output (folded) --> 
+<details>
+  <summary>Sample Output</summary>
+  
+  ![Sample Output](imgs/demo.png)
