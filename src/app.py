@@ -39,12 +39,6 @@ openai_model = st.selectbox(
 
 os.environ["OPENAI_API_KEY"] = st.text_input(
     "OpenAI API Key:", value="", type="password")
-os.environ['PINECONE_API_KEY'] = st.text_input(
-    "Pinecone API Key:", value="", type="password")
-os.environ['PINECONE_ENV'] = st.text_input(
-    "Pinecone Environment:", value="", type="password")
-os.environ['PINECONE_INDEX_NAME'] = st.text_input(
-    "Pinecone Index Name:", value="", type="password")
 
 ######## Article Loading ########
 if 'loaded' not in st.session_state:
@@ -62,27 +56,17 @@ load_article = load_btn_placeholder.button(btn_str, type="primary",
 if load_article:
     load_btn_placeholder.button("Loading...", type="primary", disabled=True)
 
-    # backdoor for testing
-    if os.environ['PINECONE_API_KEY'] == st.secrets['test_key']:
-        os.environ['PINECONE_API_KEY'] = st.secrets["pinecone_api_key"]
-        os.environ['PINECONE_ENV'] = st.secrets["pinecone_env"]
-        os.environ['PINECONE_INDEX_NAME'] = st.secrets["pinecone_index_name"]
-
     lc_client = LangChainClient(
         os.environ['OPENAI_API_KEY'],
-        VectorStore(
-            os.environ['PINECONE_API_KEY'],
-            os.environ['PINECONE_ENV'],
-            os.environ['PINECONE_INDEX_NAME'],
-        ),
+        VectorStore(),
         model=openai_model,
     )
-    docs = split_text(
+    st.session_state['docs'] = split_text(
         article,
         chunk_size=13000 if openai_model == "gpt-3.5-turbo-16k" else 1300,
     )
     # TODO: make static
-    lc_client.override_index_w_summary(docs, verbose=True)
+    lc_client.override_index_w_summary(st.session_state['docs'], verbose=True)
     st.session_state['client'] = lc_client
     st.session_state['loaded'] = True
     load_btn_placeholder.button("Loaded!", type="primary", disabled=True)

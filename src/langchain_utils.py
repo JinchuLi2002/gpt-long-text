@@ -4,7 +4,6 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.chains.summarize import load_summarize_chain
 from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Pinecone as lc_pinecone
 
 
 def split_text(
@@ -60,13 +59,12 @@ class LangChainClient:
         self.override_index(docs)
 
     def override_index(self, docs: list):
-        self.vectorstore.pinecone_index.delete(delete_all=True)
-
-        self.docsearch = lc_pinecone.from_documents(
-            docs, self.vectorstore.embedding, index_name=self.vectorstore.pinecone_index_name)
+        self.vectorstore.clear()
+        self.vectorstore.add_docs(docs)
+        self.docsearch = self.vectorstore.db
 
     def clear_index(self):
-        self.vectorstore.pinecone_index.delete(delete_all=True)
+        self.vectorstore.clear()
 
     def get_chain(self, chain_type: str = "stuff", verbose: bool = False):
         if hasattr(self, "qa"):

@@ -1,20 +1,22 @@
-from langchain.vectorstores import Pinecone as lc_pinecone
 from langchain.embeddings import OpenAIEmbeddings
-import pinecone
 import os
+from langchain.vectorstores import FAISS
 
 
 class VectorStore:
     def __init__(
         self,
-        pinecone_api_key: str,
-        pinecone_env: str,
-        pinecone_index_name: str,
     ):
-        self.PINECONE_API_KEY, self.PINECONE_ENV, self.pinecone_index_name = pinecone_api_key, pinecone_env, pinecone_index_name
-        pinecone.init(api_key=self.PINECONE_API_KEY,
-                      environment=self.PINECONE_ENV)
-
-        self.pinecone_index = pinecone.Index(
-            index_name=self.pinecone_index_name)
         self.embedding = OpenAIEmbeddings()
+        self.db = FAISS.from_texts(
+            [''], self.embedding)
+
+    def clear(self):
+        self.db = FAISS.from_texts(
+            [''], self.embedding)
+
+    def add_texts(self, texts: list[str]):
+        self.db.add_texts(texts)
+
+    def add_docs(self, docs):
+        self.db.add_documents(docs)
